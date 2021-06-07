@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/boneskull/unexpected-rxjs/compare/v0.2.4...v0.3.0) (2021-06-07)
+
+### ⚠ BREAKING CHANGES
+
+- Node.js v12+ minimum version. Will run on older though
+
+### Bug Fixes
+
+- upgrade everything, rename pkg ([bb267a5](https://github.com/boneskull/unexpected-rxjs/commit/bb267a5854b81b085d021ccae78ed808609e4865))
+
 ### [0.2.4](https://github.com/IBM/unexpected-rxjs/compare/v0.2.3...v0.2.4) (2019-08-28)
 
 ### [0.2.3](https://github.com/IBM/unexpected-rxjs/compare/v0.2.2...v0.2.3) (2019-07-12)

@@ -11,16 +11,17 @@ export default [
     output: {
       name: 'unexpectedRxjs',
       file: pkg.browser,
-      format: 'umd'
+      format: 'umd',
+      exports: 'auto',
     },
     plugins: [
       resolve(), // so Rollup can find `ms`
       commonjs(), // so Rollup can convert `ms` to an ES module
       json(),
       babel({
-        exclude: ['node_modules/**']
-      })
-    ]
+        exclude: ['node_modules/**'],
+      }),
+    ],
   },
 
   // CommonJS (for Node) and ES module (for bundlers) build.
@@ -32,13 +33,16 @@ export default [
   {
     input: 'src/unexpected-rxjs.js',
     external: ['rxjs', 'rxjs/operators'],
-    output: [{file: pkg.main, format: 'cjs'}, {file: pkg.module, format: 'es'}],
+    output: [
+      {file: pkg.main, format: 'cjs', exports: 'auto'},
+      {file: pkg.module, format: 'es'},
+    ],
     plugins: [
       resolve(),
       json(),
       babel({
-        exclude: ['node_modules/**']
-      })
-    ]
-  }
+        exclude: ['node_modules/**'],
+      }),
+    ],
+  },
 ];

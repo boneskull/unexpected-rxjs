@@ -2,7 +2,7 @@ import {isObservable, iif, EMPTY, throwError} from 'rxjs';
 import {filter, toArray, count, switchMap} from 'rxjs/operators';
 import {version} from '../package.json';
 
-const toPromise = observable => observable.pipe(toArray()).toPromise();
+const toPromise = (observable) => observable.pipe(toArray()).toPromise();
 
 export default {
   name: 'unexpected-rxjs',
@@ -11,7 +11,7 @@ export default {
     expect.addType({
       base: 'object',
       name: 'Observable',
-      identify: isObservable
+      identify: isObservable,
     });
 
     expect.addAssertion('<Observable> to complete', (expect, observable) => {
@@ -27,10 +27,11 @@ export default {
           observable
             .pipe(
               filter(
-                value => typeof any === 'undefined' || expect.equal(value, any)
+                (value) =>
+                  typeof any === 'undefined' || expect.equal(value, any)
               ),
               count(),
-              switchMap(count => iif(() => count, EMPTY, throwError()))
+              switchMap((count) => iif(() => count, EMPTY, throwError()))
             )
             .toPromise(),
           expect.flags.not ? 'to be rejected' : 'to be fulfilled'
@@ -115,7 +116,7 @@ export default {
         expect.errorMode = 'bubble';
         const promise = toPromise(observable);
         const resolved = await expect.promise.all(
-          any.map(async expected => ({actual: await promise, expected}))
+          any.map(async (expected) => ({actual: await promise, expected}))
         );
         return resolved.forEach(({actual, expected}) => {
           expect(
@@ -134,5 +135,5 @@ export default {
         return expect(toPromise(subject), 'when fulfilled', nextAssertion);
       }
     );
-  }
+  },
 };
